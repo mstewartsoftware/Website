@@ -1,14 +1,10 @@
-🌐 My Personal Website
+My Personal Website
 
-📖 About
-This is my personal portfolio website, built with HTML, CSS, and JavaScript!
-It features:
-✅ Smooth animations & transitions
-✅ Responsive design for mobile & desktop
-✅ Custom particle background effects
+Welcome to my personal web project. This site is built using HTML, CSS, and
+JavaScript. 
 
-🛠️ Technologies Used
-HTML5
-CSS3 (Flexbox & Grid, Animations)
-JavaScript (Vanilla, GSAP)
-Netlify for hosting
+I tried my best to incorporate a responsive design, smooth animations and
+interactive elements.
+
+A project made with love by Michael
+Hosted by Netlify
