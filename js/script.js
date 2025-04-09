@@ -1,17 +1,78 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loaderContainer = document.querySelector(".loader-container");
+    const loaderContainer = document.querySelector(".loader");
     const spiralLoader = document.querySelector(".spiral-loader");
     const loaderLogo = document.querySelector(".loader-logo");
     const mainContent = document.querySelector(".main-content");
     const myName = document.querySelector(".myname");
+    const logo = document.querySelector(".logo");
     const aboutMeBtn = document.getElementById("toggleBtn");
     const aboutMeContainer = document.querySelector(".about-me-container");
-    const aboutMeLeft = document.querySelector(".about-me-left");
-    const aboutMeRight = document.querySelector(".about-me-right");
     const closeButtons = document.querySelectorAll(".close-btn, .return-btn-mobile");
-    const contactForm = document.querySelector("form");
-    const toastNotification = document.getElementById("toast-notification");
     const canvas = document.getElementById("particleCanvas");
+    const socialMenuIcon = document.getElementById("socialMenuIcon");
+    const socialDropdown = document.getElementById("socialDropdown");
+    const socialLinks = document.querySelector(".social-links");
+
+    // DARK MODE //
+
+    const darkModeToggle = document.getElementById("dark-mode-toggle");
+    const modeIcon = darkModeToggle.querySelector("img");
+
+    // Function to toggle dark mode and update the icon
+    function toggleDarkMode() {
+        const backgroundLogo = document.querySelector(".background-logo img");
+        document.body.classList.toggle("dark-mode");
+        const isDarkMode = document.body.classList.contains("dark-mode");
+
+        // Update the mode icon
+        modeIcon.src = isDarkMode ? "/img/mode/dark.png" : "/img/mode/light.png";
+
+        // Change background logo if applicable
+        if (backgroundLogo) {
+            backgroundLogo.src = isDarkMode ? "img/logo/hotdog.png" : "img/logo/hotdog-dm.png";
+        }
+
+        // Update social and tech icons based on dark mode
+        updateIcons();
+    }
+
+    // Add event listener to toggle mode when clicking the button
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+
+    // === Social & Tech Icons Update === //
+    function updateIcons() {
+        // Update Social Icons
+        const socialIcons = document.querySelectorAll(".social-links img");
+
+        socialIcons.forEach(icon => {
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            if (icon.alt === "LinkedIn") {
+                icon.src = isDarkMode ? "img/social/lin-dark.png" : "img/social/lin.png";
+            } else if (icon.alt === "GitHub") {
+                icon.src = isDarkMode ? "img/social/git-dark.png" : "img/social/git.png";
+            }
+        });
+
+        // Update Tech Logos (only changing normal/dark mode, hover is handled in CSS)
+        const techLogos = document.querySelectorAll(".tech-logo");
+
+        techLogos.forEach(logo => {
+            const isDarkMode = document.body.classList.contains("dark-mode");
+            const logoClass = logo.classList[1]; // Get the tech stack name (html, css, js, etc.)
+
+            // Remove inline styles (prevents JS from overriding CSS hover effects)
+            logo.style.backgroundImage = "";
+
+            // Ensure correct class is applied for dark mode
+            if (isDarkMode) {
+                logo.classList.add("dark-mode");
+            } else {
+                logo.classList.remove("dark-mode");
+            }
+        });
+    }
+
+
 
     if (!canvas) {
         console.error("❌ particleCanvas not found!");
@@ -20,90 +81,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const ctx = canvas.getContext("2d");
 
-    // === INIT EMAILJS === //
-    emailjs.init("g7uTZnLM_Mpn088NT"); // Replace with your actual public key
-
-    // === TOAST NOTIFICATION FUNCTION === //
-    function showToast(message, type = "success") {
-        if (!toastNotification) {
-            console.error("❌ Toast notification element not found!");
-            return;
+    function adjustMyNamePosition() {
+        if (window.innerWidth < 992) {
+            myName.style.left = "50%";
+            myName.style.transform = "translate(-50%, 0)";
+            myName.style.textAlign = "center";
+        } else {
+            myName.style.left = "";
+            myName.style.transform = "";
+            myName.style.textAlign = "";
         }
-
-        toastNotification.textContent = message;
-        toastNotification.classList.remove("success", "error");
-        toastNotification.classList.add(type);
-        toastNotification.style.display = "block";
-        toastNotification.classList.add("show");
-
-        setTimeout(() => {
-            toastNotification.classList.remove("show");
-            setTimeout(() => {
-                toastNotification.style.display = "none";
-            }, 500);
-        }, 3000);
     }
 
-    // === ABOUT ME PANEL === //
+    window.addEventListener("resize", adjustMyNamePosition);
+    adjustMyNamePosition();
+
+    function toggleSocialMenu() {
+        if (socialDropdown.style.display === "block") {
+            socialDropdown.style.opacity = "0";
+            setTimeout(() => {
+                socialDropdown.style.display = "none";
+            }, 300);
+        } else {
+            socialDropdown.style.display = "block";
+            setTimeout(() => {
+                socialDropdown.style.opacity = "1";
+            }, 10);
+        }
+    }
+
+    if (socialMenuIcon) {
+        socialMenuIcon.addEventListener("click", toggleSocialMenu);
+    }
+
+    function checkScreenSize() {
+        if (window.innerWidth < 900) {
+            if (socialLinks) socialLinks.style.display = "none";
+            if (socialMenuIcon) socialMenuIcon.style.display = "block";
+        } else {
+            if (socialLinks) socialLinks.style.display = "flex";
+            if (socialMenuIcon) socialMenuIcon.style.display = "none";
+            if (socialDropdown) socialDropdown.style.display = "none";
+        }
+    }
+
+    window.addEventListener("resize", checkScreenSize);
+    checkScreenSize();
+
     function showAboutMe() {
-        console.log("✅ Showing About Me Panel");
-    
-        aboutMeContainer.style.display = "flex"; // Make it visible
-    
+        aboutMeContainer.style.display = "flex";
         setTimeout(() => {
             aboutMeContainer.classList.add("show");
         }, 50);
     }
-    
+
     function hideAboutMe() {
-        console.log("❌ Hiding About Me Panel");
-    
         aboutMeContainer.classList.remove("show");
-    
         setTimeout(() => {
-            aboutMeContainer.style.display = "none"; // Hide after animation
-        }, 800); // Wait for animation to finish
+            aboutMeContainer.style.display = "none";
+        }, 800);
     }
 
     aboutMeBtn.addEventListener("click", showAboutMe);
     closeButtons.forEach(btn => btn.addEventListener("click", hideAboutMe));
 
-    closeButtons.forEach(btn => {
-        btn.addEventListener("click", hideAboutMe);
-    });
-
-    if (aboutMeBtn) {
-        aboutMeBtn.addEventListener("click", showAboutMe);
-    } else {
-        console.warn("⚠️ toggleBtn not found!");
-    }
-
-    // === CONTACT FORM SUBMISSION (EMAILJS) === //
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value,
-            };
-
-            emailjs.send("service_vsbcxjs", "template_bmgnwe8", formData)
-                .then(() => {
-                    showToast("✅ Your message has been sent!", "success");
-                    contactForm.reset();
-                })
-                .catch((error) => {
-                    console.error("❌ Error sending email:", error);
-                    showToast("⚠️ Something went wrong. Please try again.", "error");
-                });
-        });
-    } else {
-        console.warn("⚠️ Contact form not found!");
-    }
-
-    // === LOADING SEQUENCE === //
     setTimeout(() => {
         loaderLogo.style.opacity = "1";
         spiralLoader.style.opacity = "1";
@@ -115,7 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(() => {
                 spiralLoader.style.animation = "none";
                 spiralLoader.style.transform = "rotate(0deg)";
-
                 loaderContainer.style.transition = "opacity 0.8s ease-out";
                 loaderContainer.style.opacity = "0";
 
@@ -125,16 +165,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     setTimeout(() => {
                         mainContent.classList.add("show-content");
-                        document.querySelector(".logo").classList.add("show-text");
-                        myName.classList.add("show-text");
                         document.querySelector(".blob-btn").classList.add("show-text");
+                        document.querySelector(".menu-icon").style.opacity = "1";
+
+                        if (logo) {
+                            logo.style.transition = "opacity 1s ease-in-out";
+                            logo.style.opacity = "1";
+                        }
+
+                        setTimeout(() => {
+                            const myNameContainer = document.querySelector(".myname-container");
+                            const revealBox = document.querySelector(".reveal-box");
+
+                            if (myNameContainer && revealBox) {
+                                myNameContainer.style.opacity = "1";
+                                revealBox.classList.add("start-reveal");
+                            }
+
+                            setTimeout(() => {
+                                const buttonRevealBox = document.querySelector(".button-reveal-box");
+                                if (buttonRevealBox) {
+                                    buttonRevealBox.classList.add("start-reveal");
+                                }
+
+                                setTimeout(() => {
+                                    const studentDescriptionContainer = document.querySelector(".student-description-container");
+
+                                    if (studentDescriptionContainer) {
+                                        studentDescriptionContainer.classList.add("start-reveal");
+                                    }
+                                },);
+                            }, 200);
+                        }, 1000);
                     }, 1000);
                 }, 800);
             }, 500);
         }, 2000);
     }, 1000);
 
-    // === PARTICLES EFFECT === //
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;

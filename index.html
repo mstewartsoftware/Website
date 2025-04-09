@@ -13,104 +13,194 @@
 <body>
   <canvas id="particleCanvas"></canvas>
 
-  <div class="loader-container">
-    <div class="spiral-wrapper">
-      <img src="logo/logo.png" alt="Logo" class="loader-logo"> 
+  <!--------------- loading icon --------------->
 
-      <div class="spiral-loader"></div> <!-- Initial Loader -->
-    
-      <svg class="spiral-loader" viewBox="0 0 100 100" overflow="visible"> <!-- Expanding Spiral -->
-      <g class="core"><circle class="path" cx="50" cy="50" r="1" fill="none" /></g>
-      <g class="spinner"><circle class="path" cx="50" cy="50" r="20" fill="none" /></g>
-      <g class="layer-1"><circle class="path" cx="50" cy="50" r="70" fill="none" /></g>
-      <g class="layer-2"><circle class="path" cx="50" cy="50" r="120" fill="none" /></g>
-      <g class="layer-3"><circle class="path" cx="50" cy="50" r="180" fill="none" /></g>
-      <g class="layer-4"><circle class="path" cx="50" cy="50" r="240" fill="none" /></g>
-      <g class="layer-5"><circle class="path" cx="50" cy="50" r="300" fill="none" /></g>
-      <g class="layer-6"><circle class="path" cx="50" cy="50" r="380" fill="none" /></g>
-      <g class="layer-7"><circle class="path" cx="50" cy="50" r="450" fill="none" /></g>
-      <g class="layer-8"><circle class="path" cx="50" cy="50" r="540" fill="none" /></g>
+  <div class="loader">
+    <div class="spiral-container">
+      <img src="img/logo/logo.png" alt="Logo" class="loader-logo">
+
+      <div class="spiral-loader"></div>
+
+      <svg class="spiral-loader" viewBox="0 0 100 100" overflow="visible">
+        <g class="core">
+          <circle class="path" cx="50" cy="50" r="1" fill="none" />
+        </g>
+        <g class="spinner">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" />
+        </g>
+        <g class="layer-1">
+          <circle class="path" cx="50" cy="50" r="70" fill="none" />
+        </g>
+        <g class="layer-2">
+          <circle class="path" cx="50" cy="50" r="120" fill="none" />
+        </g>
+        <g class="layer-3">
+          <circle class="path" cx="50" cy="50" r="180" fill="none" />
+        </g>
+        <g class="layer-4">
+          <circle class="path" cx="50" cy="50" r="240" fill="none" />
+        </g>
+        <g class="layer-5">
+          <circle class="path" cx="50" cy="50" r="300" fill="none" />
+        </g>
+        <g class="layer-6">
+          <circle class="path" cx="50" cy="50" r="380" fill="none" />
+        </g>
+        <g class="layer-7">
+          <circle class="path" cx="50" cy="50" r="450" fill="none" />
+        </g>
+        <g class="layer-8">
+          <circle class="path" cx="50" cy="50" r="540" fill="none" />
+        </g>
       </svg>
     </div>
   </div>
 
-  <!---------- Main Content ---------->
+
+
+
+
+  <!--------------- header --------------->
+
+  <div class="logo-container">
+    <img src="/img/logo/logo-no-bg.png" alt="MS Logo" class="logo">
+  </div>
+
+  <button id="dark-mode-toggle" aria-label="Toggle light Mode">
+    <img src="/img/mode/light.png" alt="Mode Toggle Icon">
+  </button>
+
+
+
+
+
+  <!--------------- main content --------------->
 
   <div class="main-content">
     <div class="content">
 
-      <div class="logo-container">
-        <img src="logo/logo.png" alt="MS Logo" class="logo">
+      <div class="background-logo">
+        <img src="img/logo/hotdog.png" alt="Background image of hotdog">
       </div>
 
+      <div class="myname-container">
+        <h1 class="myname">Michael Stewart</h1>
+        <div class="reveal-box"></div>
+      </div>
 
-      <div class="myname"> Michael Stewart </div>
+      <br>
+
+      <div class="student-description-container">
+        <p class="student-description">
+          <span class="reveal-box"></span>
+          Software Development Student
+        </p>
+      </div>
+
+      <br><br>
 
       <div class="buttons">
-        <button id="toggleBtn" class="blob-btn">About Me
-          <span class="blob-btn__inner">
-            <span class="blob-btn__blobs">
-              <span class="blob-btn__blob"></span>
-              <span class="blob-btn__blob"></span>
-              <span class="blob-btn__blob"></span>
-              <span class="blob-btn__blob"></span>
+        <div class="button-container">
+          <div class="button-reveal-box"></div>
+          <button id="toggleBtn" class="blob-btn">About Me
+            <span class="blob-btn__inner">
+              <span class="blob-btn__blobs">
+                <span class="blob-btn__blob"></span>
+                <span class="blob-btn__blob"></span>
+                <span class="blob-btn__blob"></span>
+                <span class="blob-btn__blob"></span>
+              </span>
             </span>
-          </span>
-        </button>
-        <br />
+          </button>
+        </div>
       </div>
-
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/michael-stewart-031312258" target="_blank">
-          <img src="logo/InBug-White.png" alt="LinkedIn" class="social-icon">
-        </a>
-        <a href="https://github.com/mstewartsoftware" target="_blank">
-            <img src="logo/github-mark-white.png" alt="GitHub" class="social-icon">
-        </a>
-    </div>
-
     </div>
   </div>
 
 
-  <!---------- About Me Content ---------->
+  <div class="social-links">
+    <a href="https://www.linkedin.com/in/michael-stewart-031312258" target="_blank">
+      <img src="/img/social/lin.png" alt="LinkedIn" class="social-icon lin-icon">
+    </a>
+    <a href="https://github.com/mstewartsoftware" target="_blank">
+      <img src="/img/social/git.png" alt="GitHub" class="social-icon git-icon">
+    </a>
+  </div>
 
-  <div class="about-me-container">
-    <!-- Left Container (About Me) -->
-    <div class="about-me-left">
+
+  <div class="tech-container">
+    <div class="tech-content">
+      <div class="tech-stack">
+        <div class="tech-logo html"></div>
+        <div class="tech-logo css"></div>
+        <div class="tech-logo js"></div>
+      </div>
+
+      <div class="tech-stack">
+        <div class="tech-logo python"></div>
+        <div class="tech-logo java"></div>
+        <div class="tech-logo sql"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="social-menu">
+    <div class="menu-icon" id="socialMenuIcon">☰</div>
+
+    <div class="dropdown-menu" id="socialDropdown">
+      <p>Let's Connect</p>
+      <a href="https://www.linkedin.com/in/michael-stewart-031312258" target="_blank">
+        <img src="img/social/lin.png" alt="LinkedIn">
+      </a>
+      <p>See Previous Work</p>
+      <a href="https://github.com/mstewartsoftware" target="_blank">
+        <img src="img/social/git.png" alt="GitHub">
+      </a>
+    </div>
+
+
+
+
+
+    <!--------------- about me content --------------->
+
+    <div class="about-me-container">
+      <div class="about-me-left">
         <h2>About Me.</h2>
         <p>Hi there, my name is <span class="bold-text">Michael Stewart.</span></p>
         <p>I'm currently an <span class="bold-text">HND Software Development</span> student at Edinburgh College.</p>
         <p>I'm also a fully qualified gas engineer and work as a heating engineer to fund my studies.</p>
         <p>Since I was a kid, I've been passionate about computers.</p>
-        <p>This passion led me to pursue further education and embark on a new career path in <span class="bold-text">software development.</span></p>
-    </div>
+        <p>This passion led me to pursue further education and embark on a new career path in <span
+            class="bold-text">software development.</span></p>
+      </div>
 
-    <!-- Right Container (Contact Form) -->
-    <div class="about-me-right">
-      <button class="close-btn">&times;</button>
-  
-      <h2>Contact Me.</h2>
-      <br>
-      <form>
+      <div class="about-me-right">
+        <button class="close-btn">&times;</button>
+
+        <h2>Let's talk.</h2>
+        <br>
+        <form>
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required>
-  
+
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required>
-  
+
           <label for="message">Message:</label>
           <textarea id="message" name="message" rows="4" required></textarea>
-  
+
           <button type="submit">Send</button>
-      </form>
+        </form>
+      </div>
     </div>
+
+    <div id="toast-notification"></div>
+
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   </div>
-
-  <div id="toast-notification"></div>
-
-  <script src="js/script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </body>
 
 </html>
